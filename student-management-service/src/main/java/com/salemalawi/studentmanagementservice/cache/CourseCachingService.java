@@ -53,7 +53,7 @@ public class CourseCachingService {
             courses = (List<CourseDto>) responseResponseEntity.getBody().getContent();
             return courses;
         }
-        
+
 
     }
 
