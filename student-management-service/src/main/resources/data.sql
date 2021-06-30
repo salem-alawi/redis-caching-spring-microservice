@@ -1,0 +1,11 @@
+insert into STUDENT values (1,'salem','alawi','salemalowi@gmail.com',28,0,'2021-06-30');
+insert into student values (2,'salem','alawi','salemalowi@gmail.com',28,0,'2021-06-30');
+insert into student values (3,'salem','alawi','salemalowi@gmail.com',28,0,'2021-06-30');
+insert into student values (4,'salem','alawi','salemalowi@gmail.com',28,0,'2021-06-30');
+insert into student values (5,'salem','alawi','salemalowi@gmail.com',28,0,'2021-06-30');
+insert into student values (6,'salem','alawi','salemalowi@gmail.com',28,0,'2021-06-30');
+insert into student values (7,'salem','alawi','salemalowi@gmail.com',28,0,'2021-06-30');
+insert into student values (8,'salem','alawi','salemalowi@gmail.com',28,0,'2021-06-30');
+insert into student values (9,'salem','alawi','salemalowi@gmail.com',28,0,'2021-06-30');
+insert into student values (10,'salem','alawi','salemalowi@gmail.com',28,0,'2021-06-30');
+insert into student values (11,'salem','alawi','salemalowi@gmail.com',28,0,'2021-06-30');

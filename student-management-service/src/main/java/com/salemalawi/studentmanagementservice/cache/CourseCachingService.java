@@ -1,9 +1,11 @@
 package com.salemalawi.studentmanagementservice.cache;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salemalawi.studentmanagementservice.dto.ListItemResponse;
 import com.salemalawi.studentmanagementservice.dto.course.CourseDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +26,9 @@ public class CourseCachingService {
     private HashOperations hashOperations;
 
     RestTemplate restTemplate = new RestTemplate();
-    String baseURL = "http://localhost:8081";
+
+    @Value("$courseServiceUrl")
+    String baseURL;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -51,8 +55,19 @@ public class CourseCachingService {
         ResponseEntity<ListItemResponse> responseResponseEntity = restTemplate.getForEntity(baseURL + "/students/" + studentId + "/courses", ListItemResponse.class);
         if (responseResponseEntity.getStatusCode().is2xxSuccessful()) {
             courses = (List<CourseDto>) responseResponseEntity.getBody().getContent();
-            return courses;
+            try {
+                hashOperations.put(COURSES, studentId, this.objectMapper.writeValueAsString(courses));
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+
+
         }
+
+
+
+
+        return courses;
 
 
     }

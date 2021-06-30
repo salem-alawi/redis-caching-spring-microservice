@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
+@Table(name ="student")
 public class Student {
 
     @Id
@@ -17,6 +18,7 @@ public class Student {
     private String firstName;
     private String lastName;
     private String email;
+
     private Integer age;
     @Enumerated(EnumType.ORDINAL)
     private StudentGenderEnum gender;
