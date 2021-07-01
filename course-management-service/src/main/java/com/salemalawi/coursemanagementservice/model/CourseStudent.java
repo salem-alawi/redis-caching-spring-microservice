@@ -8,16 +8,17 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "course_students")
-public class CourseStudent {
+public class CourseStudent extends DateAudit{
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "student_id")
+    private Long studentId;
 
-    @Column(name = "category")
-    private String category;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
 }

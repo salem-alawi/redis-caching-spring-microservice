@@ -1,7 +1,8 @@
-package com.salemalawi.studentmanagementservice.dto.course;
+package com.salemalawi.coursemanagementservice.dto;
 
 import lombok.Data;
 
+import java.time.LocalDate;
 
 @Data
 public class CourseDto {
