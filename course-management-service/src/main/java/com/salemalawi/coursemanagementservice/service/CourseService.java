@@ -2,9 +2,10 @@ package com.salemalawi.coursemanagementservice.service;
 
 
 import com.salemalawi.coursemanagementservice.dto.CourseDto;
+import com.salemalawi.coursemanagementservice.exception.ExceptionMessage;
+import com.salemalawi.coursemanagementservice.exception.ResourceNotFoundCustom;
 import com.salemalawi.coursemanagementservice.model.Course;
 import com.salemalawi.coursemanagementservice.repository.CourseRepository;
-import com.salemalawi.coursemanagementservice.repository.CourseStudentRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 @Service
 public class CourseService {
@@ -23,17 +25,23 @@ public class CourseService {
     @Autowired
     private ModelMapper modelMapper;
 
+
     public Function<Course, CourseDto> toDto() {
 
         return (course -> this.modelMapper.map(course, CourseDto.class));
 
     }
 
+    public CourseDto toDto(Course course) {
+        return this.modelMapper.map(course,CourseDto.class);
+    }
+
     public Page<Course> findAllCourse(Pageable pageable) {
-
         return this.courseRepository.findAll(pageable);
+    }
 
-
+    public Course findOneById(Long id) throws ResourceNotFoundCustom {
+        return this.courseRepository.findById(id).orElseThrow(ExceptionMessage.NOT_FOUND);
     }
 
 
