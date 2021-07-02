@@ -13,3 +13,7 @@ spring:
     jpa:
       repositories:
         bootstrap-mode: default
+server:
+  port: 8080
+url:
+  courseService: http://127.0.0.1:8081

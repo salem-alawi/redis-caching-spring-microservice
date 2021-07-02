@@ -1,4 +1,4 @@
-package com.salemalawi.coursemanagementservice.dto;
+package com.salemalawi.coursemanagementservice.dto.course;
 
 import lombok.Data;
 

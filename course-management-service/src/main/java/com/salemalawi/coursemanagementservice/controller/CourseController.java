@@ -1,6 +1,6 @@
 package com.salemalawi.coursemanagementservice.controller;
 
-import com.salemalawi.coursemanagementservice.dto.CourseDto;
+import com.salemalawi.coursemanagementservice.dto.course.CourseDto;
 import com.salemalawi.coursemanagementservice.exception.ResourceNotFoundCustom;
 import com.salemalawi.coursemanagementservice.model.Course;
 import com.salemalawi.coursemanagementservice.service.CourseService;
@@ -33,7 +33,6 @@ public class CourseController {
 
         Course course= this.courseService.findOneById(id);
         CourseDto courseDto=this.courseService.toDto(course);
-
         return new ResponseEntity(courseDto,HttpStatus.OK);
     }
 

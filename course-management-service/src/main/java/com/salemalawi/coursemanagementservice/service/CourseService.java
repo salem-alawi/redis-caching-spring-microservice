@@ -1,7 +1,7 @@
 package com.salemalawi.coursemanagementservice.service;
 
 
-import com.salemalawi.coursemanagementservice.dto.CourseDto;
+import com.salemalawi.coursemanagementservice.dto.course.CourseDto;
 import com.salemalawi.coursemanagementservice.exception.ExceptionMessage;
 import com.salemalawi.coursemanagementservice.exception.ResourceNotFoundCustom;
 import com.salemalawi.coursemanagementservice.model.Course;
@@ -11,10 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 @Service
 public class CourseService {

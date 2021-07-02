@@ -1,4 +1,6 @@
+
 spring:
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -13,3 +15,7 @@ spring:
     jpa:
       repositories:
         bootstrap-mode: default
+server:
+  port: 8081
+url:
+  studentService: http://127.0.0.1:8080

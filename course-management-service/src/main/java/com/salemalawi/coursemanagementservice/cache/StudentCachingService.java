@@ -1,9 +1,8 @@
-package com.salemalawi.studentmanagementservice.cache;
+package com.salemalawi.coursemanagementservice.cache;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.salemalawi.studentmanagementservice.dto.ListItemResponse;
-import com.salemalawi.studentmanagementservice.dto.course.CourseDto;
+import com.salemalawi.coursemanagementservice.dto.student.StudentDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.HashOperations;
@@ -13,12 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
-import java.util.List;
 
 @Service
-public class CourseCachingService {
+public class StudentCachingService {
 
-    private static final String COURSES = "COURSES_KEY_FOR_STUDENT_SERVICE";
+    private static final String STUDENT = "STUDENT_KEY_FOR_COURSE_SERVICE";
 
 
     @Autowired
@@ -27,7 +25,7 @@ public class CourseCachingService {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    @Value("$url.courseService")
+    @Value("$url.studentService")
     String baseURL;
 
     @Autowired
@@ -39,38 +37,28 @@ public class CourseCachingService {
     }
 
 
-    public List<CourseDto> findAllCourseByStudentId(Long studentId) {
+    public StudentDto findOneById(Long studentId) {
 
-        List<CourseDto> courses = null;
+        StudentDto student = null;
 
         try {
-            courses = this.objectMapper.readValue((String) hashOperations.get(COURSES, studentId), List.class);
+            student = this.objectMapper.readValue((String) hashOperations.get(STUDENT, studentId), StudentDto.class);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        if (courses != null)
-            return courses;
+        if (student != null)
+            return student;
 
-        ResponseEntity<ListItemResponse> responseResponseEntity = restTemplate.getForEntity(baseURL + "/students/" + studentId + "/courses", ListItemResponse.class);
+        ResponseEntity<StudentDto> responseResponseEntity = restTemplate.getForEntity(baseURL + "/students/" + studentId , StudentDto.class);
         if (responseResponseEntity.getStatusCode().is2xxSuccessful()) {
-            courses = (List<CourseDto>) responseResponseEntity.getBody().getContent();
+            student = responseResponseEntity.getBody();
             try {
-                hashOperations.put(COURSES, studentId, this.objectMapper.writeValueAsString(courses));
+                hashOperations.put(STUDENT, studentId, this.objectMapper.writeValueAsString(student));
             } catch (JsonProcessingException e) {
                 e.printStackTrace();
             }
-
-
         }
-
-
-
-
-        return courses;
-
-
+        return student;
     }
-
-
 }
