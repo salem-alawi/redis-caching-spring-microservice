@@ -1,4 +1,15 @@
 spring:
+  cloud:
+    function:
+      definition: courseServiceSink
+    stream:
+      bindings:
+        studentServiceEventProduce-in-0:
+          destination: studentSerivceEvent
+        courseServiceSink-in-0:
+          destination: courseServiceEvent
+          group: studentService
+
   jpa:
     hibernate:
       ddl-auto: update

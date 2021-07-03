@@ -1,6 +1,14 @@
-
 spring:
-
+  cloud:
+    function:
+      definition: studentManagementServiceSink
+    stream:
+      bindings:
+        courseManagementServiceEventProduce-in-0:
+          destination: courseServiceEvent
+        studentManagementServiceSink-in-0:
+          destination: studentSerivceEvent
+          group: courseManagementService
   jpa:
     hibernate:
       ddl-auto: update

@@ -13,7 +13,6 @@ public class CourseStudentDto {
     private Long id;
     private CourseDto course;
     private StudentDto student;
-
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 

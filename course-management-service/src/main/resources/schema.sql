@@ -1,4 +1,4 @@
-create table course
+create table courses
 (
    id integer not null,
    name varchar(255) not null,
@@ -8,7 +8,7 @@ create table course
    primary key(id)
 );
 
-create table course_student{
+create table course_students(
 
 id integer not null,
 student_id integer not null,
@@ -16,4 +16,4 @@ course_id integer not null,
 created_at timestamp not null,
 updated_at timestamp not null,
 primary key(id)
-}
+);
